@@ -47,7 +47,7 @@ for post, url_name, img in get_url():
     content_text = soup.find('div', class_='entry-content').text
     card_dict[post]["content"] = ' '.join([i.strip() for i in content_text.split()])
 
-print(card_dict)
-#file = open('list_card.json', 'a', encoding='utf-8')
-#json.dump(card_dict, file, indent=2, ensure_ascii=False)
-#file.close()
+if card_dict:
+    with open('list_card.json', 'a', encoding='utf-8') as file:
+        json.dump(card_dict, file, indent=2, ensure_ascii=False)
+
