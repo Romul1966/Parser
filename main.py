@@ -6,13 +6,13 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 YaBrowser/23.7.5.734 Yowser/2.5 Safari/537.36"}
 
 
-#def check_post(id):
-  #  with open('list_card.json', encoding='utf-8') as file:
-     #   data = json.load(file)
-      #  for k in data.keys():
-        #    if id == k:
-            #    return True
-      #  return False
+def check_post(id):
+    with open('list_card.json', encoding='utf-8') as file:
+        data = json.load(file)
+        for k in data.keys():
+            if id == k:
+                return True
+        return False
 
 
 def get_url():
@@ -34,11 +34,10 @@ def get_url():
 
 
 card_dict = {}
-file = open('list_card.json', 'a', encoding='utf-8')
 for post, url_name, img in get_url():
 
-   # if check_post(post):
-       # continue
+    if check_post(post):
+        continue
 
     card_dict[post] = {"img": img, "url_name": url_name}
 
@@ -48,5 +47,7 @@ for post, url_name, img in get_url():
     content_text = soup.find('div', class_='entry-content').text
     card_dict[post]["content"] = ' '.join([i.strip() for i in content_text.split()])
 
-json.dump(card_dict, file, indent=2, ensure_ascii=False)
-file.close()
+print(card_dict)
+#file = open('list_card.json', 'a', encoding='utf-8')
+#json.dump(card_dict, file, indent=2, ensure_ascii=False)
+#file.close()
